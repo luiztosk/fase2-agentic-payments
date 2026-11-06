@@ -1,19 +1,6 @@
-# Welcome to your CDK TypeScript project
+# Source:
 
-This is a blank project for CDK development with TypeScript.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
-
-* `npm run build`   type-check the project
-* `npm run watch`   watch for changes and type-check
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
-
-
+https://docs.aws.amazon.com/cdk/v2/guide/serverless-example.html
 
 # Testing with MiniStack on docker:
 
@@ -23,7 +10,7 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 docker run -p 4566:4566 -e LOG_LEVEL=DEBUG ministackorg/ministack
 ```
 
-## 2. on this directory bootstrap and deploy:
+## 2. on this directory, bootstrap and deploy:
 
 ```bash
 export AWS_ACCESS_KEY_ID=test
@@ -45,7 +32,7 @@ region = us-east-1
 
 ## 4. invoke the lambda directly:
 
-find the unique identifier (for example `FunctionName: CdkHelloWorldStack-HelloWorldFunctionB2AB6E79-766087AC9E31B`)
+find the unique identifier
 
 ```bash
 aws lambda list-functions
@@ -55,6 +42,17 @@ then call the lambda
 
 ```bash
 aws lambda invoke --function-name CdkHelloWorldStack-HelloWorldFunctionB2AB6E79-766087AC9E31B output.txt
+```
+
+```bash
+cat output.txt | jq
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "text/plain"
+  },
+  "body": "{\"message\":\"Hello World!\"}"
+}
 ```
 
 ## 5. access via the API Gateway:
